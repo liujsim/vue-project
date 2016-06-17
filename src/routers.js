@@ -1,10 +1,13 @@
+import Index from 'views/Index.vue'
+import About from 'views/About.vue'
+
 export default function (router) {
   router.map({
     '/': {
-      component: require('./views/Index.vue')
+      component: Index
     },
     '/about': {
-      component: require('./views/About.vue')
+      component: About
     }
   })
   router.beforeEach(function (transition) {
