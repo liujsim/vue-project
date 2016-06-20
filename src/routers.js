@@ -11,6 +11,10 @@ export default function (router) {
       name: 'index', // 首页
       component: Index
     },
+    '/index': {
+      name: 'index', // 首页
+      component: Index
+    },
     '/async': {
       name: 'async',
       component: (resolve) => require(['./views/async'], resolve)
@@ -31,7 +35,15 @@ export default function (router) {
     '/eleme': {
       name: 'eleme',
       component: Eleme
+    },
+    '*': {
+      name: '404error',
+      component: require('./views/404.vue')
     }
+  })
+  // 默认List主页
+  router.redirect({
+    '/': '/index'
   })
   // router.beforeEach(function (transition) {
   //   transition.next()
