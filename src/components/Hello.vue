@@ -5,6 +5,8 @@
 </template>
 
 <script>
+console.log('Hello.vue loading')
+
 export default {
   data () {
     return {

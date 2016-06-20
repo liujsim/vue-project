@@ -19,7 +19,8 @@ module.exports = {
       'src': path.resolve(__dirname, '../src'),
       'assets': path.resolve(__dirname, '../src/assets'),
       'components': path.resolve(__dirname, '../src/components'),
-      'views': path.resolve(__dirname, '../src/views')
+      'views': path.resolve(__dirname, '../src/views'),
+      'vux-components': 'vux/src/components/'
     }
   },
   resolveLoader: {
@@ -50,6 +51,10 @@ module.exports = {
         loader: 'babel',
         include: projectRoot,
         exclude: /node_modules/
+      },
+      {
+       test: /vux.src.*?js$/,
+       loader: 'babel'
       },
       {
         test: /\.json$/,

@@ -4,6 +4,14 @@
 
 快速验证各种最佳实践
 
+ElemeFE
+
+http://127.0.0.1:8080/#!/eleme
+
+Async 加载
+
+http://127.0.0.1:8080/#!/async
+
 ## Build Setup
 
 ``` bash
