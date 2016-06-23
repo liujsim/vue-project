@@ -4,13 +4,17 @@
 
 快速验证各种最佳实践
 
+Vux
+
+[Vux gitbook doc](https://www.gitbook.com/book/vuxjs/vux)
+
 ElemeFE
 
-http://127.0.0.1:8080/#!/eleme
+http://127.0.0.1:3005/#!/eleme
 
 Async 加载
 
-http://127.0.0.1:8080/#!/async
+http://127.0.0.1:3005/#!/async
 
 ## Build Setup
 
@@ -18,7 +22,7 @@ http://127.0.0.1:8080/#!/async
 # install dependencies
 npm install
 
-# serve with hot reload at localhost:8080
+# serve with hot reload at localhost:3005
 npm run dev
 
 # build for production with minification

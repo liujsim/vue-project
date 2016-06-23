@@ -5,7 +5,7 @@ html,body,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,form,input,label,textarea,p {
 }
 
 article,aside,details,footer,header,nav,section {
-  display: block
+  display: block;
 }
 
 em,i {
@@ -63,11 +63,23 @@ table {
 
  .btn {
     display: inline-block;
+    cursor: pointer;
     line-height: 30px;
     height: 30px;
-    width: 100;
+    padding: 0 10px;
+    white-space: nowrap;
     background: #1ab394;
     text-align: center;
     color: #fff;
     border-radius: 5px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
  }
+
+ .btn:hover {
+    color: #ffffff;
+    background-color: #318F76;
+    border-color: #318F76;
+}
