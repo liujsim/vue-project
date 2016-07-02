@@ -1,10 +1,16 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
+    <form>
+      <input  type="text" name="" id="" v-model="msg">
+    </form>
+     <h1 v-input="msg">{{ msg }}</h1>
+    <!-- {{}} 是 v-text 语法糖 -->
+    <!-- <h1 v-text="msg"></h1> -->
   </div>
 </template>
 
 <script>
+// import Vue from 'vue'
 console.log('Hello.vue loading')
 
 export default {
@@ -16,6 +22,39 @@ export default {
       // its initial state.
       msg: 'Hello World!'
     }
+  },
+  props: ['message'],
+  ready () {
+
+  },
+  methods: {
+
+  },
+  components: {
+
+  },
+  directives: {
+    /**
+     * 当只需要 update 函数时，可以传入一个函数代替定义对象
+     * @type {Object}
+     */
+    input: function () {
+      console.log('update')
+    }
+    // input: {
+    //   bind: function () {
+
+    //   },
+    //   update: function () {
+    //     console.log('update ')
+    //   }
+    // }
+  },
+  filters: {
+
+  },
+  watch: {
+
   }
 }
 </script>

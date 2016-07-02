@@ -16,6 +16,13 @@ Async 加载
 
 http://127.0.0.1:3005/#!/async
 
+
+其他 demo
+
+  fastclick 解决 300 ms 延迟
+
+http://127.0.0.1:3005/#!/demo
+
 ## Build Setup
 
 ``` bash

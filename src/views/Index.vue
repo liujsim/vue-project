@@ -1,5 +1,8 @@
 <template>
   <div>
+    <a href="#" v-link="{path:'demo'}">demo</a> <br>
+    <a href="#" v-link="{path:'eleme'}">eleme</a> <br>
+    <a href="#" v-link="{path:'404error'}">404</a> <br>
     <Hello></Hello>
   </div>
 </template>

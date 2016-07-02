@@ -11,12 +11,17 @@
 import MessageBox from 'vue-msgbox'
 import Toast from 'vue-toast-mobile'
 
-require('vue-msgbox/lib/vue-msgbox.css')
+require('vue-msgbox/lib/vue-msgbox.css') // require node_modules 中的 css
 require('vue-toast-mobile/lib/index.css')
 
 console.log('Eleme.vue')
 
 export default {
+  route: {
+    data: function (transition) {
+      console.log('route 切换')
+    }
+  },
   methods: {
     eleAlrt () {
       MessageBox('Good job!', 'You clicked the button!', 'success')
