@@ -3,19 +3,37 @@
     <div v-if="$loadingRouteData" class="modal-backdrop white"><div class="loading"></div></div>
     <div v-if="!$loadingRouteData">
       <span>hello world</span>
-      <button @click='toggleComment($event)' @touchstart='calcTime'>toggle comment</button>
+      <button @click='toggleComment()' @touchstart='calcTime'>toggle comment</button>
+      <ul>
+        <li v-for="item in homeData">
+          <h4>{{ item.title}}</h4>
+        </li>
+      </ul>
       <comment :show="comment"></comment>
     </div>
   </div>
 </template>
 <script>
 import Comment from '../components/Comment'
+import $ from 'jquery'
 
 export default {
   components: {
     Comment
   },
+  ready: function () {
+    console.log($)
+  },
   route: {
+    // activate勾子-检查权限 > data勾子发送 ajax 获取 data 的请求 > 渲染页面（通过$loadingRouteData实现loading）
+    activate (transition) {
+      console.log('Demo activated!')
+      transition.next()
+    },
+    deactivate (transition) {
+      console.log('Demo deactivated!')
+      transition.next()
+    },
     data: function (transition) {
       let self = this
       // pure js
@@ -30,7 +48,8 @@ export default {
       // xhr.send('')
       return Promise.all([
         self.defTime1(),
-        self.defTime2()
+        self.defTime2(),
+        self.getHomepage()
       ]).then(function (results) {
         console.log(results)
       })
@@ -39,6 +58,7 @@ export default {
   data () {
     return {
       comment: false,
+      homeData: '',
       clickTime: '',
       touchTime: ''
     }
@@ -72,6 +92,20 @@ export default {
         }, 3000)
       })
       return p
+    },
+    timer (t) { // promise 超时方法
+      return new Promise(resolve => setTimeout(resolve, t))
+    },
+    getHomepage () {
+      let self = this
+      window.fetch('https://cnodejs.org/api/v1/topics?page=1&limit=20&tab=all').then(function (response) {
+        return response.json()
+      }).then(function (data) {
+        console.log(data)
+        self.homeData = data.data
+      }).catch(function (e) {
+        console.log('Oops, error')
+      })
     }
   }
 }
@@ -121,12 +155,12 @@ button{
     from {
         -ms-transform: rotate(0);
         -webkit-transform: rotate(0);
-        transform: rotate(0)
+        transform: rotate(0);
     }
     to {
         -ms-transform: rotate(360deg);
         -webkit-transform: rotate(360deg);
-        transform: rotate(360deg)
+        transform: rotate(360deg);
     }
 }
 </style>

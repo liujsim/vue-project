@@ -13,7 +13,7 @@
   position: fixed;
   bottom: 0;
   z-index: 10000;
-  background: RGBA(244, 244, 246, 1.00);
+  background: HSLA(206, 80%, 54%, 1.00);
   padding: 0 0.46875rem;   /* 30px */
   height: 5.9375rem;
   width: 100%;

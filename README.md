@@ -4,6 +4,16 @@
 
 快速验证各种最佳实践
 
+[引入 jQuery](http://www.cnblogs.com/pandabunny/p/5417938.html)
+  > webpack.dev.conf
+
+fetch
+
+```
+npm install whatwg-fetch --save
+npm install es6-promise --save
+```
+
 Vux
 
 [Vux gitbook doc](https://www.gitbook.com/book/vuxjs/vux)
