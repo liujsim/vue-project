@@ -16,6 +16,7 @@
 <script>
 import Comment from '../components/Comment'
 import $ from 'jquery'
+import fetchJsonp from 'fetch-jsonp'
 
 export default {
   components: {
@@ -70,6 +71,20 @@ export default {
       // console.log('click', this.clickTime)
       // console.log('time diff', this.clickTime - this.touchTime)
       this.$data.comment = !(this.$data.comment)
+      // evalute
+      this.evalute()
+    },
+    evalute () {
+      fetchJsonp('http://www.flickr.com/services/feeds/photos_public.gne?format=json', {
+        jsonpCallback: 'jsoncallback',
+        timeout: 3000
+      }).then(function (response) {
+        return response.json()
+      }).then(function (json) {
+        document.body.innerHTML = JSON.stringify(json)
+      })['catch'](function (ex) {
+        document.body.innerHTML = 'failed:' + ex
+      })
     },
     calcTime () {
       // this.touchTime = new Date().getTime()
@@ -99,7 +114,7 @@ export default {
     getHomepage () {
       let self = this
       window.fetch('https://cnodejs.org/api/v1/topics?page=1&limit=20&tab=all').then(function (response) {
-        return response.json()
+        return response.json() // 返回 promise 对象
       }).then(function (data) {
         console.log(data)
         self.homeData = data.data
@@ -110,9 +125,19 @@ export default {
   }
 }
 </script>
+<style src="../assets/styles/variable.scss"></style>
+<style lang="scss">
+button{
+  // cursor: pointer;
+}
+</style>
 <style >
 button{
-  border: 1px solid green;
+  cursor: pointer;
+  border: 1px solid #2c97e8;
+  background-color: transparent;
+  padding: 5px 10px;
+  border-radius: 5px;
 }
 .modal-backdrop {
     background: transparent;
@@ -153,13 +178,9 @@ button{
     }
     @keyframes rotate {
     from {
-        -ms-transform: rotate(0);
-        -webkit-transform: rotate(0);
         transform: rotate(0);
     }
     to {
-        -ms-transform: rotate(360deg);
-        -webkit-transform: rotate(360deg);
         transform: rotate(360deg);
     }
 }

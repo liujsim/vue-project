@@ -32,13 +32,14 @@ module.exports = {
         test: /\.vue$/,
         loader: 'eslint',
         include: projectRoot,
-        exclude: /node_modules/
+        exclude: /node_modules/  // 默认 exclude
       },
       {
         test: /\.js$/,
         loader: 'eslint',
         include: projectRoot,
-        exclude: /node_modules/
+        // exclude: /node_modules/
+        exclude: [/node_modules/, /src\/assets\/js/]
       }
     ],
     loaders: [

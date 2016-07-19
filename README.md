@@ -9,10 +9,44 @@
 
 fetch
 
+  Demo.vue 和 cnode.md
+
 ```
 npm install whatwg-fetch --save
 npm install es6-promise --save
+npm install fetch-jsonp --save
 ```
+
+vue-router 的 history.back
+
+sass
+
+```
+npm install sass-loader node-sass --save-dev
+```
+
+使用 scss 格式的 sass 语法
+
+```
+<style lang="scss">
+button{
+  cursor: pointer;
+}
+</style>
+```
+
+async 和 await
+
+```
+npm install babel-preset-stage-3 --save
+```
+
+
+父子组件的通信
+
+Parent
+  ChildA
+  ChildB
 
 Vux
 
