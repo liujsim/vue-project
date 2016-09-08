@@ -1,4 +1,4 @@
-import Index from 'views/Index.vue'
+import Index from 'views/Index.vue' // 注意设置了 alias
 // import Async from 'views/Async.vue'
 import About from 'views/About.vue'
 import Vux from 'views/Vux.vue'

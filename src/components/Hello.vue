@@ -2,6 +2,7 @@
   <div class="hello">
     <form>
       <input  type="text" name="" id="" v-model="msg">
+      <button @click="encrypt">加密</button>
     </form>
      <h1 v-input="msg">{{ msg }}</h1>
     <!-- {{}} 是 v-text 语法糖 -->
@@ -10,6 +11,7 @@
 </template>
 
 <script>
+import {encrypt} from '../util.js'
 // import Vue from 'vue'
 console.log('Hello.vue loading')
 
@@ -28,7 +30,9 @@ export default {
 
   },
   methods: {
-
+    encrypt () {
+      this.msg = encrypt(this.msg)
+    }
   },
   components: {
 

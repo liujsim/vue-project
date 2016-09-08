@@ -2,28 +2,32 @@
   <div>
     <div v-if="$loadingRouteData" class="modal-backdrop white"><div class="loading"></div></div>
     <div v-if="!$loadingRouteData">
-      <span>hello world</span>
-      <button @click='toggleComment()' @touchstart='calcTime'>toggle comment</button>
+      <button class="primary" @click='toggleComment()' @touchstart='calcTime'>toggle comment</button>
       <ul>
         <li v-for="item in homeData">
           <h4>{{ item.title}}</h4>
         </li>
       </ul>
       <comment :show="comment"></comment>
+      <confirm :confirm="confirm"></confirm>
     </div>
   </div>
 </template>
 <script>
 import Comment from '../components/Comment'
-import $ from 'jquery'
+import Confirm from '../components/Confirm'
+// import $ from 'jquery'
+import fetch from 'isomorphic-fetch'
 import fetchJsonp from 'fetch-jsonp'
+import MessageBox from 'vue-msgbox'
 
 export default {
   components: {
-    Comment
+    Comment,
+    Confirm
   },
   ready: function () {
-    console.log($)
+    // console.log($)
   },
   route: {
     // activate勾子-检查权限 > data勾子发送 ajax 获取 data 的请求 > 渲染页面（通过$loadingRouteData实现loading）
@@ -33,7 +37,16 @@ export default {
     },
     deactivate (transition) {
       console.log('Demo deactivated!')
-      transition.next()
+      // debugger
+      console.log(MessageBox)
+      // if (transition.from.path === '/demo') {
+      //   MessageBox.confirm('退出当前页面', {'cancelButtonText': '退出', 'confirmButtonText': '退出'}).then(function (action) {
+      //     transition.next()
+      //   }, function (action) {
+      //     transition.next()
+      //   })
+      // }
+      // transition.next()
     },
     data: function (transition) {
       let self = this
@@ -61,22 +74,64 @@ export default {
       comment: false,
       homeData: '',
       clickTime: '',
-      touchTime: ''
+      touchTime: '',
+      confirm: {
+        show: false,
+        text: '',
+        cancelButtonText: '',
+        confirmButtonText: '',
+        confirm () {},
+        cancel () {}
+      }
     }
   },
   methods: {
+    createConfirm (text, confirm, cancel, cancelButtonText = '不保留', confirmButtonText = '保留') {
+      this.confirm.show = true
+      this.confirm.text = text
+      this.confirm.cancelButtonText = cancelButtonText
+      this.confirm.confirmButtonText = confirmButtonText
+      this.confirm.confirm = confirm
+      this.confirm.cancel = cancel
+    },
+    closeConfirm () {
+      this.confirm.show = false
+      this.confirm.text = ''
+      this.confirm.cancelButtonText = ''
+      this.confirm.confirmButtonText = ''
+      this.confirm.confirm = () => {}
+      this.confirm.cancel = () => {}
+    },
     toggleComment (event) {
       // this.clickTime = new Date().getTime()
       // console.log(event.target)
       // console.log('click', this.clickTime)
       // console.log('time diff', this.clickTime - this.touchTime)
       this.$data.comment = !(this.$data.comment)
-      // evalute
-      this.evalute()
+      // console.log(this.confirm)
+      // this.confirm.show = true
+      this.createConfirm('确定要删除吗？', () => {
+        console.log('confirm')
+      }, () => {
+        console.log('cancel')
+      })
+      // this.evalute()
     },
     evalute () {
       fetchJsonp('http://www.flickr.com/services/feeds/photos_public.gne?format=json', {
         jsonpCallback: 'jsoncallback',
+        timeout: 3000
+      }).then(function (response) {
+        return response.json()
+      }).then(function (json) {
+        document.body.innerHTML = JSON.stringify(json)
+      })['catch'](function (ex) {
+        document.body.innerHTML = 'failed:' + ex
+      })
+    },
+    acceptVideo () {
+      fetchJsonp('http://172.16.41.36:8081/wsp/videocm?seatId=1001&custId=123456&opCode=221&serialId=359', {
+        jsonpCallback: 'jsoncallback', // 指定服务端的 jsonp 参数
         timeout: 3000
       }).then(function (response) {
         return response.json()
@@ -108,37 +163,20 @@ export default {
       })
       return p
     },
-    timer (t) { // promise 超时方法
-      return new Promise(resolve => setTimeout(resolve, t))
-    },
     getHomepage () {
       let self = this
-      window.fetch('https://cnodejs.org/api/v1/topics?page=1&limit=20&tab=all').then(function (response) {
+      fetch('https://cnodejs.org/api/v1/topics?page=1&limit=20&tab=all').then(function (response) {
         return response.json() // 返回 promise 对象
       }).then(function (data) {
         console.log(data)
         self.homeData = data.data
-      }).catch(function (e) {
-        console.log('Oops, error')
       })
     }
   }
 }
 </script>
 <style src="../assets/styles/variable.scss"></style>
-<style lang="scss">
-button{
-  // cursor: pointer;
-}
-</style>
 <style >
-button{
-  cursor: pointer;
-  border: 1px solid #2c97e8;
-  background-color: transparent;
-  padding: 5px 10px;
-  border-radius: 5px;
-}
 .modal-backdrop {
     background: transparent;
     position: fixed;

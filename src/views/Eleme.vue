@@ -20,6 +20,18 @@ export default {
   route: {
     data: function (transition) {
       console.log('route 切换')
+    },
+    deactivate (transition) {
+      console.log('Demo deactivated!')
+      // debugger
+      if (transition.from.path === '/eleme') {
+        MessageBox.confirm('退出当前页面', {'cancelButtonText': '退出', 'confirmButtonText': '退出'}).then(function (action) {
+          transition.next()
+        }, function (action) {
+          transition.next()
+        })
+      }
+      // transition.next()
     }
   },
   methods: {

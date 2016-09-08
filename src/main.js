@@ -8,8 +8,8 @@ Vue.use(Router)
 
 let router = new Router({
   hashbang: true,
-  history: false,
-  transitionOnLoad: true
+  history: false
+  // transitionOnLoad: true
 })
 routerMap(router)
 router.start(App, '#app')

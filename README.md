@@ -12,7 +12,7 @@ fetch
   Demo.vue 和 cnode.md
 
 ```
-npm install whatwg-fetch --save
+npm install isomorphic-fetch --save
 npm install es6-promise --save
 npm install fetch-jsonp --save
 ```

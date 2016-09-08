@@ -8,7 +8,7 @@
 
   // FastClick.attach(document.body)
 
-  console.log('App.vue')
+  // console.log('App.vue')
 </script>
 <style src="./assets/styles/normalize.css"></style>
 <style src="./assets/styles/base.css"></style>
